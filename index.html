@@ -234,6 +234,153 @@ function setLang(lang) {
 setLang("sv");
 </script>
 
+
+<script>
+const AI_ENABLED = true; // ← SET TO false TO DISABLE AI COMPLETELY
+</script>
+
+
+<style>
+#ai-chat-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #1f7a4a;
+    color: #fff;
+    padding: 12px 16px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    z-index: 1000;
+}
+
+#ai-chat-box {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 320px;
+    max-height: 420px;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+#ai-chat-header {
+    padding: 10px;
+    background: #1f7a4a;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 8px 8px 0 0;
+}
+
+#ai-chat-messages {
+    padding: 10px;
+    overflow-y: auto;
+    flex-grow: 1;
+    font-size: 14px;
+}
+
+.ai-msg {
+    margin-bottom: 8px;
+}
+
+.ai-user {
+    font-weight: 600;
+}
+
+#ai-chat-input {
+    display: flex;
+    border-top: 1px solid #ddd;
+}
+
+#ai-chat-input input {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    font-size: 14px;
+}
+
+#ai-chat-input button {
+    padding: 10px 14px;
+    border: none;
+    background: #1f7a4a;
+    color: #fff;
+    cursor: pointer;
+}
+</style>
+
+<div id="ai-chat-button">Hjälp / Help (AI)</div>
+
+<div id="ai-chat-box">
+    <div id="ai-chat-header">AI-assistent</div>
+    <div id="ai-chat-messages"></div>
+    <div id="ai-chat-input">
+        <input type="text" id="ai-input" placeholder="Skriv din fråga…" />
+        <button onclick="sendMessage()">Skicka</button>
+    </div>
+</div>
+
+<script>
+if (!AI_ENABLED) {
+    document.getElementById("ai-chat-button").style.display = "none";
+}
+
+const chatButton = document.getElementById("ai-chat-button");
+const chatBox = document.getElementById("ai-chat-box");
+const messages = document.getElementById("ai-chat-messages");
+
+chatButton.onclick = () => {
+    chatBox.style.display = chatBox.style.display === "flex" ? "none" : "flex";
+    chatBox.style.flexDirection = "column";
+};
+
+function addMessage(text, sender = "AI") {
+    const div = document.createElement("div");
+    div.className = "ai-msg";
+    div.innerHTML = sender === "AI"
+        ? text
+        : `<span class="ai-user">Du:</span> ${text}`;
+    messages.appendChild(div);
+    messages.scrollTop = messages.scrollHeight;
+}
+
+addMessage(`
+Hej! Jag är en digital assistent för Trädgårdshjälp Kolbäck.<br>
+Jag kan svara på frågor och hjälpa dig vidare till rätt bokning.<br>
+Alla bokningar bekräftas manuellt av en förälder.
+`);
+
+function sendMessage() {
+    const input = document.getElementById("ai-input");
+    const text = input.value.trim();
+    if (!text) return;
+
+    addMessage(text, "USER");
+    input.value = "";
+
+    // -------------------------
+    // PLACEHOLDER RESPONSE (SAFE TEST MODE)
+    // -------------------------
+    setTimeout(() => {
+        addMessage(
+            "För att gå vidare, vänligen använd bokningsformuläret eller kontakta oss via e-post: <br><strong>tradgardshjalp.kolback@gmail.com</strong>"
+        );
+    }, 600);
+
+    // -------------------------
+    // REAL AI CALL GOES HERE (LATER)
+    // -------------------------
+}
+</script>
+
+
+
+
+    
 </body>
 </html>
 
