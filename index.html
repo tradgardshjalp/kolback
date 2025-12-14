@@ -1,1 +1,239 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trädgårdshjälp Kolbäck</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #f6f6f4;
+            color: #2b2b2b;
+            line-height: 1.6;
+        }
+
+        header {
+            text-align: center;
+            background: #ffffff;
+            padding: 20px 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        header img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .lang-toggle {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .lang-toggle button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 0 5px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 30px 20px;
+        }
+
+        h1, h2 {
+            color: #1f3d2b;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .cta {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .cta a {
+            display: inline-block;
+            background: #1f7a4a;
+            color: white;
+            padding: 14px 26px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 10px;
+        }
+
+        .bio {
+            margin-top: 50px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .bio img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            opacity: 0.9;
+        }
+
+        .bio p {
+            margin: 0;
+            font-size: 14px;
+            color: #444;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 14px;
+            padding: 20px;
+            color: #555;
+        }
+
+        footer a {
+            color: #1f7a4a;
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <img src="tghjalp.png" alt="Trädgårdshjälp Kolbäck">
+    <div class="lang-toggle">
+        <button onclick="setLang('sv')">Svenska</button> |
+        <button onclick="setLang('en')">English</button>
+    </div>
+</header>
+
+<div class="container">
+
+    <h1 id="title"></h1>
+    <p id="intro"></p>
+
+    <h2 id="servicesTitle"></h2>
+
+    <div class="services">
+        <div class="card">
+            <h3 id="service1Title"></h3>
+            <p id="service1Text"></p>
+        </div>
+        <div class="card">
+            <h3 id="service2Title"></h3>
+            <p id="service2Text"></p>
+        </div>
+        <div class="card">
+            <h3 id="service3Title"></h3>
+            <p id="service3Text"></p>
+        </div>
+    </div>
+
+    <div class="cta">
+        <a href="#" id="bookButton" target="_blank" rel="noopener"></a>
+    </div>
+
+    <p id="availability"></p>
+
+    <div class="bio">
+        <img src="oliver2.png" alt="Oliver">
+        <p id="bioText"></p>
+    </div>
+
+</div>
+
+<footer>
+    <p id="privacy"></p>
+    <p>
+        Kontakt / Contact:
+        <a href="mailto:tradgardshjalp.kolback@gmail.com">
+            tradgardshjalp.kolback@gmail.com
+        </a>
+    </p>
+</footer>
+
+<script>
+const forms = {
+    sv: "https://forms.gle/F39xzfszcVNs9BzD8",
+    en: "https://forms.gle/Ei6nSc5j3nnRS2gG8"
+};
+
+const text = {
+    sv: {
+        title: "Trädgårdshjälp i Kolbäck",
+        intro: "Lokal hjälp med snöskottning och enklare trädgårdsarbete för privatpersoner i Kolbäck. Tryggt, personligt och i lagom omfattning.",
+        servicesTitle: "Tjänster",
+        service1Title: "Snöskottning",
+        service1Text: "Skottning av gångar, uppfarter och entréer under vintertid.",
+        service2Title: "Gräsklippning",
+        service2Text: "Gräsklippning under sommarhalvåret.",
+        service3Title: "Enklare trädgårdshjälp",
+        service3Text: "Lövkrattning och lättare arbete vid behov.",
+        bookButton: "Boka hjälp",
+        availability: "Arbetet utförs främst på helger samt vissa vardagskvällar i begränsad omfattning.",
+        bioText: "Hej! Jag heter Oliver och är 15 år. Jag vill gärna tjäna lite extra pengar vid sidan av skolan och samtidigt hjälpa till i närområdet. Arbetet sker i lugn takt och med stöd från mina föräldrar.",
+        privacy: "Uppgifter används endast för att hantera bokningar och sparas inte längre än nödvändigt."
+    },
+    en: {
+        title: "Garden help in Kolbäck",
+        intro: "Local help with snow clearing and simple garden work for private households in Kolbäck. Safe, personal and limited in scope.",
+        servicesTitle: "Services",
+        service1Title: "Snow clearing",
+        service1Text: "Clearing paths, driveways and entrances during winter.",
+        service2Title: "Grass cutting",
+        service2Text: "Lawn mowing during the summer season.",
+        service3Title: "Simple garden help",
+        service3Text: "Leaf raking and light outdoor tasks when needed.",
+        bookButton: "Book service",
+        availability: "Work is carried out mainly on weekends and limited weekday evenings.",
+        bioText: "Hi! My name is Oliver and I’m 15. I’d like to earn some extra money alongside school while helping people locally. The work is done at a calm pace and with support from my parents.",
+        privacy: "Information is used only to manage bookings and is not stored longer than necessary."
+    }
+};
+
+function setLang(lang) {
+    document.documentElement.lang = lang;
+    document.getElementById("title").textContent = text[lang].title;
+    document.getElementById("intro").textContent = text[lang].intro;
+    document.getElementById("servicesTitle").textContent = text[lang].servicesTitle;
+    document.getElementById("service1Title").textContent = text[lang].service1Title;
+    document.getElementById("service1Text").textContent = text[lang].service1Text;
+    document.getElementById("service2Title").textContent = text[lang].service2Title;
+    document.getElementById("service2Text").textContent = text[lang].service2Text;
+    document.getElementById("service3Title").textContent = text[lang].service3Title;
+    document.getElementById("service3Text").textContent = text[lang].service3Text;
+    document.getElementById("bookButton").textContent = text[lang].bookButton;
+    document.getElementById("bookButton").href = forms[lang];
+    document.getElementById("availability").textContent = text[lang].availability;
+    document.getElementById("bioText").textContent = text[lang].bioText;
+    document.getElementById("privacy").textContent = text[lang].privacy;
+}
+
+setLang("sv");
+</script>
+
+</body>
+</html>
 
